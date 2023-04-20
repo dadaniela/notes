@@ -5,8 +5,9 @@ export function Details(){
   return(
     <Container>
       <h1>Hello World!</h1>
-      <span>Daniela</span>
-      <Button></Button>
+      <Button label="Login" loading />
+      <Button label="Sign up"/>
+      <Button label="Back"/>
     </Container>
   )
 };
