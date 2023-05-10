@@ -34,7 +34,7 @@ export const Menu = styled.ul`
     padding-top: 64px;
     text-align: center;
     > li {
-        
+
     }
 `;
 export const Search = styled.div`
@@ -49,5 +49,12 @@ export const Content = styled.div`
 `;
 export const NewNote = styled.button`
     grid-area: newnote;
-    background: palevioletred;
+    background: ${({theme}) => theme.COLORS.ORANGE};
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > svg {
+        margin-right: 8px;
+    }
 `;
