@@ -13,13 +13,3 @@ export const Container = styled.section`
         font-weight: 400;
     };
 `;
-
-export const Links = styled.ul`
-    list-style: none;
-    > li {
-      margin-top: 12px;
-      a {
-        color: ${({theme}) => theme.COLORS.WHITE};
-      }
-    }
-`;
