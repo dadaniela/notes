@@ -9,7 +9,9 @@ export function Details(){
       <Header/>
       <Section title="Links">
         <Links>
-          <li>1</li>
+          <li>
+            <a href="https://github.com/dadaniela" target="_blank">Daniela's GitHub</a>
+          </li>
           <li>2</li>
           <li>3</li>
         </Links>
