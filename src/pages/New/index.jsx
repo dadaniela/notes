@@ -1,5 +1,6 @@
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
+import { Link } from "react-router-dom";
 import { TextArea } from "../../components/TextArea";
 import { NoteItem } from "../../components/NoteItem";
 import { Section } from "../../components/Section";
@@ -14,7 +15,7 @@ export function New(){
                 <Form>
                     <header>
                         <h1>Create note</h1>
-                        <a href="/">back</a>
+                        <Link to="/">back</Link>
                     </header>
                     <Input placeholder="Title"/>
                     <TextArea placeholder="write your insights and lists"/>

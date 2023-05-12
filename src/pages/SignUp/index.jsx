@@ -1,4 +1,5 @@
 import { FiMail, FiLock, FiUser } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Container, Form, HomeImg } from "./styles";
@@ -15,7 +16,7 @@ export function SignUp(){
                 <Input placeholder="Email" type="text" icon={FiMail}/>
                 <Input placeholder="Password" type="password" icon={FiLock}/>
                 <Button label="Sign up"/>
-                <a href="#">Log in</a>
+                <Link to="/">Log in</Link>
             </Form>
             
         </Container>
