@@ -7,6 +7,7 @@ import { Section } from "../../components/Section";
 import { ButtonText } from "../../components/ButtonText";
 
 export function Home(){
+    
     return(
         <Container>
             <Brand>
@@ -33,7 +34,7 @@ export function Home(){
                     </Note>
                 </Section>
             </Content>
-            <NewNote>
+            <NewNote to="/new">
                 <FiPlus/>
                 New note
             </NewNote>
