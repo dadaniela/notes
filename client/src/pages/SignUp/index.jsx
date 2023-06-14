@@ -1,5 +1,6 @@
 import { FiMail, FiLock, FiUser } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { api } from "../../../../server/src/services/api";
 import { useState } from "react";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
@@ -9,8 +10,23 @@ export function SignUp(){
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
     function handleSignUp(){
-        console.log(name, email, password)
+        if(!name || !email || !password){
+            return alert("All fields required")
+        }
+        api.post("/users", { name, email, password })
+        .then(() => {
+            alert("Account created");
+            navigate("/");
+        })
+        .catch(error => {
+            if(error.response){
+                alert(error.response.data.message);
+            } else {
+                alert("Account creation failed");
+            }
+        })
     }
     return(
         <Container>
