@@ -1,6 +1,6 @@
 import { FiMail, FiLock } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
 import { api } from "../../../../server/src/services/api";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
@@ -15,6 +15,8 @@ export function SignIn(){
     //     }
     //     await api.post()
     // }
+    const data = useAuth();
+    console.log("meu contexto =>", data);
     return(
         <Container>
             <Form>
