@@ -1,7 +1,9 @@
 import { RiShutDownLine } from "react-icons/ri";
+import { useAuth } from "../../hooks/auth";
 import { Container, Profile, Logout } from "./styles";
 
 export function Header(){
+    const { logOut } = useAuth();
     return(
         <Container>
             <Profile to="/profile">
@@ -11,7 +13,7 @@ export function Header(){
                     <strong>Daniela Trindade</strong>
                 </div>
             </Profile>
-            <Logout>
+            <Logout onClick={ logOut }>
                 <RiShutDownLine/>
             </Logout>
         </Container>
