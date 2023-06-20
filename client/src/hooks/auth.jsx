@@ -27,6 +27,20 @@ function AuthProvider({ children }){
         const user = localStorage.removeItem("@notes:user");
         setData({});
     }
+    async function updateProfile({user}){
+        try{
+            await api.put("/users", user);
+            localStorage.setItem("@notes:user", JSON.stringify(user));
+            setData({user, token: data.token});
+            alert("Your profile has been updated");
+        } catch(error) {
+            if(error.message){
+                alert(error.response.data.message)
+            } else {
+                alert("Profile update has failed")
+            }
+        }
+    }
     useEffect(() => {
         const token = localStorage.getItem("@notes:token");
         const user = localStorage.getItem("@notes:user");
@@ -42,7 +56,8 @@ function AuthProvider({ children }){
         <AuthContext.Provider value={{
             signIn,
             logOut,
-            user: data.user
+            user: data.user,
+            updateProfile
         }}>
             { children }
         </AuthContext.Provider>
