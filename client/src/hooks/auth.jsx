@@ -12,7 +12,7 @@ function AuthProvider({ children }){
             const { user, token } = response.data;
             localStorage.setItem("@notes:user", JSON.stringify(user));
             localStorage.setItem("@notes:token", token);
-            api.defaults.headers.authorization = `Bearer ${token}`;
+            api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             setData({ user, token });
         } catch(error){
             if(error.response){
@@ -31,7 +31,7 @@ function AuthProvider({ children }){
         const token = localStorage.getItem("@notes:token");
         const user = localStorage.getItem("@notes:user");
         if(token && user){
-            api.defaults.headers.authorization = `Bearer ${token}`;
+            api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             setData({
                 token,
                 user: JSON.parse(user)
