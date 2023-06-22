@@ -32,6 +32,15 @@ export function New(){
         setTags(prevState => prevState.filter(tag => tag !== deleted));
     }
     async function handleNewNote(){
+        if(!title){
+            return alert("title required");
+        }
+        if(newLink){
+            return alert("there is a link waiting to be added");
+        }
+        if(newTag){
+            return alert("there is a tag waiting to be added");
+        }
         await api.post("/notes", {
             title,
             description,
