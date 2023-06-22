@@ -1,18 +1,22 @@
-import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { api } from "../../../../server/src/services/api";
 import { TextArea } from "../../components/TextArea";
 import { NoteItem } from "../../components/NoteItem";
 import { Section } from "../../components/Section";
 import { Button } from "../../components/Button";
+import { Header } from "../../components/Header";
+import { Input } from "../../components/Input";
 import { Container, Form } from "./styles";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export function New(){
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [links, setLinks] = useState([]);
     const [newLink, setNewLink] = useState("");
     const [tags, setTags] = useState([]);
     const [newTag, setNewTag] = useState("");
+    const navigate = useNavigate();
     function handleAddLink(){
         setLinks(prevState => [...prevState, newLink]);
         setNewLink("");
@@ -27,6 +31,16 @@ export function New(){
     function handleRemoveTag(deleted){
         setTags(prevState => prevState.filter(tag => tag !== deleted));
     }
+    async function handleNewNote(){
+        await api.post("/notes", {
+            title,
+            description,
+            tags,
+            links
+        })
+        alert("Note saved");
+        navigate("/");
+    }
     return(
         <Container>
             <Header/>
@@ -36,8 +50,14 @@ export function New(){
                         <h1>Create note</h1>
                         <Link to="/">back</Link>
                     </header>
-                    <Input placeholder="Title"/>
-                    <TextArea placeholder="write your insights and lists"/>
+                    <Input
+                        placeholder="Title"
+                        onChange={e => setTitle(e.target.value)}
+                    />
+                    <TextArea
+                        placeholder="write your insights or create lists"
+                        onChange={e => setDescription(e.target.value)}
+                    />
                     <Section title="Links">
                         {
                             links.map((link, index) => (
@@ -76,7 +96,10 @@ export function New(){
                             />
                         </div>
                     </Section>
-                    <Button label="Save"/>
+                    <Button
+                        label="Save"
+                        onClick={handleNewNote}
+                    />
                 </Form>
             </main>
         </Container>
