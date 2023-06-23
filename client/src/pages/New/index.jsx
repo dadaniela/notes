@@ -48,7 +48,7 @@ export function New(){
             links
         })
         alert("Note saved");
-        navigate("/");
+        navigate(-1);
     }
     return(
         <Container>

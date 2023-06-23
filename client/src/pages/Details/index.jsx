@@ -13,7 +13,7 @@ export function Details(){
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   function handleBack(){
-    navigate("/"); 
+    navigate(-1); 
   }
   async function handleDeleteNote(){
     const confirm = window.confirm("Delete note?");
@@ -66,7 +66,10 @@ export function Details(){
                   }
                 </Section>
               }
-            <Button label="Back" onClick={handleBack}/>
+            <Button
+              label="Back"
+              onClick={handleBack}
+            />
           </Content>
         </main>
       }
