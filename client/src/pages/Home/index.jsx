@@ -5,6 +5,7 @@ import { Section } from "../../components/Section";
 import { FiPlus, FiSearch } from "react-icons/fi";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
+import { useNavigate } from "react-router-dom";
 import { Note } from "../../components/Note";
 import { useState, useEffect } from "react";
 
@@ -13,6 +14,7 @@ export function Home(){
     const [tagsSelected, setTagsSelected] = useState([]);
     const [search, setSearch] = useState("");
     const [notes, setNotes] = useState([]);
+    const navigate = useNavigate();
     function handleTagSelected(tagName){
         if(tagName === "all"){
             return setTagsSelected([]);
@@ -24,6 +26,9 @@ export function Home(){
         } else{
             setTagsSelected(prevState => [...prevState, tagName]);
         }
+    }
+    function handleDetails(id){
+        navigate(`/details/${id}`);
     }
     useEffect(() => {
         async function fetchTags(){
@@ -79,6 +84,7 @@ export function Home(){
                             <Note
                                 key={String(note.id)}
                                 data={note}
+                                onClick={() => handleDetails(note.id)}
                             />
                         )) 
                     }
