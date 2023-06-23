@@ -35,7 +35,7 @@ export const Menu = styled.ul`
     padding-top: 64px;
     text-align: center;
     > li {
-
+        margin: 6px;
     }
 `;
 export const Search = styled.div`
