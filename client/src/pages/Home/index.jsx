@@ -11,6 +11,8 @@ import { useState, useEffect } from "react";
 export function Home(){
     const [tags, setTags] = useState([]);
     const [tagsSelected, setTagsSelected] = useState([]);
+    const [search, setSearch] = useState("");
+    const [notes, setNotes] = useState([]);
     function handleTagSelected(tagName){
         const alreadySelected = tagsSelected.includes(tagName);
         if(alreadySelected){
@@ -27,6 +29,13 @@ export function Home(){
         }
         fetchTags();
     }, []);
+    useEffect(() => {
+        async function fetchNotes(){
+            const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`);
+            setNotes(response.data);
+        }
+        fetchNotes();
+    }, [tagsSelected, search]);
     return(
         <Container>
             <Brand>
@@ -54,18 +63,22 @@ export function Home(){
                 }
             </Menu>
             <Search>
-                <Input placeholder="search" icon={FiSearch}/>
+                <Input
+                    placeholder="search"
+                    icon={FiSearch}
+                    onChange={() => setSearch(e.target.value)}
+                />
             </Search>
             <Content>
                 <Section title="My notes">
-                    <Note data={{
-                        title: "React",
-                        tags:[
-                            {id: 1, name: "react"},
-                            {id: 2, name: "node"}
-                        ]
-                    }}>
-                    </Note>
+                    {
+                        notes.map(note => (
+                            <Note
+                                key={String(note.id)}
+                                data={note}
+                            />
+                        )) 
+                    }
                 </Section>
             </Content>
             <NewNote to="/new">
